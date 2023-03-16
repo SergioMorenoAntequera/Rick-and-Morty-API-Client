@@ -32,9 +32,20 @@ function AllEntityPage() {
     }, [selectedAPI])
     
 
-    console.log(data)
     return (<div>
-        
+        <div onClick={async ()=> {
+            const t = await selectedAPI?.all()
+            console.log(t)
+            if(t?.info.next){
+                const a = await t?.info.next()
+                if(a?.info.prev){
+                    const b = await a?.info.prev()
+                    console.log(b.results)
+                }
+            }
+            }}>
+            pra
+        </div>
     </div>)
 }
 
