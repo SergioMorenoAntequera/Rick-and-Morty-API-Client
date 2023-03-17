@@ -6,7 +6,7 @@ import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { useQuery } from "react-query"
 
-export default function useEntityPagination(entityAPI: GenericAPI<any>) {
+export default function useEntityPagination<T>(entityAPI: GenericAPI<T>) {
     const router = useRouter()
     const page = parseInt(router.query.page?.toString() ?? '1')
 

@@ -19,7 +19,7 @@ export default function Home() {
     <h1 className="text-9xl font-bold mb-4"> Try one of this ones out </h1>
     <h2 className="text-4xl mb-10"> 
       <button className="p-2 bg-gray-300 rounded mr-4 hover:bg-gray-400 transition" onClick={()=>refetch()}> Click here </button>
-       if you dont like this ones 
+       If you dont like any of this characters 
     </h2>
     <div className="grid grid-cols-4 gap-10 mb-20">
       {randomCharacters?.map(character => <Link className="block" href={`/character/${character.id}`} key={character.id}>

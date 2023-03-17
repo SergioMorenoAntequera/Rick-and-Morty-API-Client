@@ -2,6 +2,7 @@
 
 import characterAPI from '@/api/character.api'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useQuery } from 'react-query'
@@ -29,14 +30,24 @@ function CharacterPage() {
                 <p> {character?.gender}</p>
                 <p> {character?.species}</p>
                 <p> {character?.status}</p>
-                <p> Is from: {origin?.name}</p>
+                <p> 
+                    Is from: 
+                    <Link className='text-blue-500' href={`/location/${origin?.id}`}> {origin?.name} </Link> 
+                    a place in the {location?.dimension} dimension
+                    with {location?.residents.length} residents
+                </p>
                 <p> Last seen in: {location?.name}</p>
             </div>
         </div>
         
         <div>
-            Episodes:
-            {episodes?.map(episode => <div key={episode.id}> {episode.name} </div>)}
+            <p className='text-4xl font-bold my-2'> Episodes where this charater is seen: </p>
+            <div className='flex flex-wrap gap-2'>
+                {episodes?.map(episode => <Link key={episode.id} href={`/episode/${episode.id}`}> 
+                    <div className='p-1 bg-gray-300 rounded'> {episode.name} </div>
+                </Link>)}
+                 
+            </div>
         </div>
 
     </div>)
