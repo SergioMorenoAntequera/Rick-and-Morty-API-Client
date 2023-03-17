@@ -5,7 +5,7 @@ import { useRouter } from "next/router"
 
 export default function Home() {
   const router = useRouter()
-  
+
   function redirectTo(entity:string) {
     router.push(`/${entity}`)
   }
@@ -15,7 +15,7 @@ export default function Home() {
 
     <button onClick={()=>{redirectTo('character')}}> characters </button>
     <button onClick={()=>{redirectTo('episode')}}> episodes </button>
-    <button onClick={()=>{redirectTo('locations')}}> locations </button>
+    <button onClick={()=>{redirectTo('location')}}> locations </button>
     
   </>)
 }

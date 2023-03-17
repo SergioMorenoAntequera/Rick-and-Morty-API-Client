@@ -4,6 +4,7 @@ type AllResponse<T> = {
     info: {
         count: number,
         pages: number,
+        page: number, 
         next?: () => Promise<AllResponse<T>>,
         prev?: () => Promise<AllResponse<T>>
     },

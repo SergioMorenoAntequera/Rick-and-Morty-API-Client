@@ -1,10 +1,11 @@
 import AllResponse from "./AllResponse"
 
 
-type GeneralAPI<T> = {
+type GenericAPI<T> = {
     entityName: string
-    all: (page?: number) => Promise<AllResponse<T>>
-    getById: (idTofetch: string) => Promise<T> 
+    getAll: (page?: number) => Promise<AllResponse<T>>
+    getById: (idTofetch: number) => Promise<T> 
+    getManyById: (idsTofetch: number[]) => Promise<Awaited<T>[]>
 }
 
-export default GeneralAPI
+export default GenericAPI

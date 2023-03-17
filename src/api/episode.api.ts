@@ -4,5 +4,12 @@ import constructClientConsumer from "./client.api"
 // CALLS  //////////////////////////////////////////////////////////////////// 
 
 const entityName = 'episode'
-const episodeAPI = constructClientConsumer<Episode>(entityName)
+
+const episodeAPI = {
+    generic: constructClientConsumer<Episode>(entityName),
+    specific: {
+        
+    }
+}
+
 export default episodeAPI
