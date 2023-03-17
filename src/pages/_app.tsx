@@ -5,7 +5,12 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter()
-  const queryClient = new QueryClient()
+  
+  const queryClient = new QueryClient({defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false
+    },
+  }})
 
   return (<>
     <QueryClientProvider client={queryClient}>

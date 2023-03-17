@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import characterAPI from '@/api/character.api'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -8,26 +10,15 @@ function CharacterPage() {
     const router = useRouter()
     const id = parseInt(router.query.id?.toString() ?? '')
 
-    const { isLoading, error, data:character, refetch } = useQuery('selectedAPI', () => id ? characterAPI.generic.getById(id) : null)
-  
+    const { isLoading, error, data, refetch } = useQuery('character', () => id ? characterAPI.specific.getEverything(id) : null)
+    const [character, origin, location, episodes] = (data ?? [])
+
     useEffect(() => {
         if(!id) return
         refetch()
     }, [id])
-
-    useEffect(() => {
-        if(!character) return
-    }, [character])
-
-    async function getEpisodes() {
-        if(!character) return
-        const t = await characterAPI.specific.getEpisodes(character?.episode)
-        console.log(t)
-    }
     
     return (<div>
-        
-        <div onClick={getEpisodes}> get spisodes </div>
 
         <div className='flex gap-6'>
             <div>
@@ -38,9 +29,15 @@ function CharacterPage() {
                 <p> {character?.gender}</p>
                 <p> {character?.species}</p>
                 <p> {character?.status}</p>
+                <p> Is from: {origin?.name}</p>
+                <p> Last seen in: {location?.name}</p>
             </div>
         </div>
         
+        <div>
+            Episodes:
+            {episodes?.map(episode => <div key={episode.id}> {episode.name} </div>)}
+        </div>
 
     </div>)
 }

@@ -1,4 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import GenericAPI from "@/types/GeneralAPI"
+import { getAroundNumbers } from "@/utils/numberUtils"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { useQuery } from "react-query"
@@ -34,14 +37,13 @@ export default function useEntityPagination(entityAPI: GenericAPI<any>) {
         setData(newReponse)
     }
     async function goToPage(page: number) {
-        if(!data?.info.next) return
         const newReponse =  await entityAPI.getAll(page)
         router.push('?page='+page, undefined, { shallow: true })
         setData(newReponse)
     }
 
 
-    const pagesToShow = getAroundNumbers(data?.info.page, 3)
+    const pagesToShow = getAroundNumbers(data?.info.page, 3, data?.info.pages)
 
     const paginationControllerEl = <div className='flex gap-4 mb-6 items-center'>
         <div className="mr-8">
@@ -69,13 +71,3 @@ export default function useEntityPagination(entityAPI: GenericAPI<any>) {
     return { isLoading, error, data, showPrev, showNext, paginationControllerEl }
 }
 
-function getAroundNumbers(num?: number, limit?: number) {
-    limit = limit ?? 2
-    if(!num) return []
-    
-    var arr = [];
-    for (var i = Math.max(num - limit, 1); i <= num + limit; i++) {
-      arr.push(i);
-    }
-    return arr;
-  }

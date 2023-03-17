@@ -8,14 +8,17 @@ import { extractPageNumber } from "./utils";
 const manyRecordsProxy = <T>(entityName: string, data: any): AllResponse<T> => {
 
     const nextFunction = data.info.next 
-            ? () => getAll<T>(entityName, extractPageNumber(data.info.next)) 
-            : undefined
-
+        ? () => getAll<T>(entityName, extractPageNumber(data.info.next)) 
+        : undefined
+    
     const prevFunction = data.info.prev
-            ? () => getAll<T>(entityName, extractPageNumber(data.info.prev)) 
-            : undefined
+        ? () => getAll<T>(entityName, extractPageNumber(data.info.prev)) 
+        : undefined
 
-    const page = extractPageNumber(data.info.next) - 1 || extractPageNumber(data.info.prev) + 1 || 1 
+    const page = 
+           data.info.next ? extractPageNumber(data.info.next) - 1 : 0 
+        || data.info.prev ? extractPageNumber(data.info.prev) + 1 : 0 
+        || 1 
 
     return {
         info: {

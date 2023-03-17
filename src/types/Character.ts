@@ -6,14 +6,14 @@ type Character = {
     species: string,
     type: string,
     gender: string,
-    image: "https://rickandmortyapi.com/api/character/avatar/41.jpeg",
+    image: string
     origin: {
-        name: "Fantasy World",
-        url: "https://rickandmortyapi.com/api/location/48"
+        name: string
+        url: string
     },
     location: {
-        name: "Fantasy World",
-        url: "https://rickandmortyapi.com/api/location/48"
+        name: string
+        url: string
     },
     episode: string[]
 }
