@@ -1,10 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import characterAPI from '@/api/character.api'
 import episodeAPI from '@/api/episode.api'
-import locationAPI from '@/api/location.api'
-import Image from 'next/image'
-import Link from 'next/link'
+import LabelList from '@/components/LabelList'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useQuery } from 'react-query'
@@ -32,11 +29,7 @@ function CharacterPage() {
             </div>
         </div>
         
-        <div>
-            Characters in the episode:
-            {characters?.map(character => <div key={character.id}> {character.name} </div>)}
-        </div>
-
+        <LabelList title='Characters in the episode:' entityName='character' data={characters} />
     </div>)
 }
 

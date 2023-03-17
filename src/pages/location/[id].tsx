@@ -2,6 +2,7 @@
 
 import characterAPI from '@/api/character.api'
 import locationAPI from '@/api/location.api'
+import LabelList from '@/components/LabelList'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -31,10 +32,7 @@ function CharacterPage() {
             </div>
         </div>
         
-        <div>
-            Residents:
-            {residents?.map(resident => <div key={resident.id}> {resident.name} </div>)}
-        </div>
+        <LabelList title='Residents of this place:' entityName='character' data={residents} />
 
     </div>)
 }

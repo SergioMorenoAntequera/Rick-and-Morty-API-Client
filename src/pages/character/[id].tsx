@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import characterAPI from '@/api/character.api'
+import LabelList from '@/components/LabelList'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -40,15 +41,10 @@ function CharacterPage() {
             </div>
         </div>
         
-        <div>
-            <p className='text-4xl font-bold my-2'> Episodes where this charater is seen: </p>
-            <div className='flex flex-wrap gap-2'>
-                {episodes?.map(episode => <Link key={episode.id} href={`/episode/${episode.id}`}> 
-                    <div className='p-1 bg-gray-300 rounded'> {episode.name} </div>
-                </Link>)}
-                 
-            </div>
-        </div>
+        
+
+        <LabelList title='Episodes where this charater is seen:' entityName='episode' data={episodes} />
+
 
     </div>)
 }
