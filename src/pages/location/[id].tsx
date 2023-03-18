@@ -3,6 +3,7 @@
 import characterAPI from '@/api/character.api'
 import locationAPI from '@/api/location.api'
 import LabelList from '@/components/LabelList'
+import Character from '@/types/Character'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -32,7 +33,13 @@ function CharacterPage() {
             </div>
         </div>
         
-        <LabelList title='Residents of this place:' entityName='character' data={residents} />
+        <LabelList title='Residents of this place:' 
+            entityName='character' data={residents} 
+            renderEl={(character: Character) => <>
+                <p className='font-bold'> {character.name} </p>
+                <p className='opacity-75'> {character.species} </p>
+            </>}
+        />
 
     </div>)
 }

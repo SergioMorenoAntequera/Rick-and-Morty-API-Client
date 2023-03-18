@@ -4,6 +4,7 @@ import characterAPI from "@/api/character.api"
 import getRandomNumbers from "@/utils/numberUtils"
 import Link from "next/link"
 import Image from "next/image"
+import StatusIndicator from "@/components/StatusIndicator"
 
 const NUMBER_OF_RANDOM_CHARACTERS = 8
 
@@ -30,10 +31,7 @@ export default function Home() {
             
             <div className="text-white text-left absolute bottom-0 p-4 bg-gray-800 w-full">
               <p className="font-bold"> {character.name} </p>
-              <p className="flex items-center gap-3"> 
-                {character.status === 'Alive' ? <div className="h-4 w-4 rounded-full bg-green-600"></div> : <div className="h-4 w-4 rounded-full bg-red-600"> </div> } 
-                {character.status} 
-              </p>
+              <StatusIndicator status={character.status}/>
             </div>
 
           </div>

@@ -2,6 +2,8 @@
 
 import episodeAPI from '@/api/episode.api'
 import LabelList from '@/components/LabelList'
+import StatusIndicator from '@/components/StatusIndicator'
+import Character from '@/types/Character'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useQuery } from 'react-query'
@@ -29,7 +31,14 @@ function CharacterPage() {
             </div>
         </div>
         
-        <LabelList title='Characters in the episode:' entityName='character' data={characters} />
+        <LabelList title='Characters in the episode:' 
+            entityName='character' data={characters} 
+            renderEl={(character: Character) => <>
+                <p className='font-bold'> {character.name} </p>
+                <p className='opacity-75'> {character.species} </p>
+                <StatusIndicator character={character}/>
+            </>}
+        />
     </div>)
 }
 

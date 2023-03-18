@@ -2,6 +2,8 @@
 
 import characterAPI from '@/api/character.api'
 import LabelList from '@/components/LabelList'
+import StatusIndicator from '@/components/StatusIndicator'
+import Episode from '@/types/Episodes'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -30,7 +32,7 @@ function CharacterPage() {
                 <p className='text-3xl'> {character?.name}</p>
                 <p> {character?.gender}</p>
                 <p> {character?.species}</p>
-                <p> {character?.status}</p>
+                <StatusIndicator character={character}/>
                 <p> 
                     Is from: 
                     <Link className='text-blue-500' href={`/location/${origin?.id}`}> {origin?.name} </Link> 
@@ -43,7 +45,13 @@ function CharacterPage() {
         
         
 
-        <LabelList title='Episodes where this charater is seen:' entityName='episode' data={episodes} />
+        <LabelList title='Episodes where this charater is seen:' 
+            entityName='episode' data={episodes} 
+            renderEl={(episode: Episode) => <>
+                <p className='font-bold'> {episode.name} </p>
+                <p className='opacity-75'> Live on: {episode.air_date} </p>
+            </>}
+        />
 
 
     </div>)

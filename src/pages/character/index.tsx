@@ -1,4 +1,5 @@
 import characterAPI from '@/api/character.api'
+import StatusIndicator from '@/components/StatusIndicator'
 import useEntityPagination from '@/hooks/useEntityPagination'
 import Character from '@/types/Character'
 import Image from 'next/image'
@@ -23,7 +24,8 @@ function CharacterPage() {
                 </div>
                 
                 <p className='truncate font-bold'> {character.name} </p>
-                <p className=''> {character.status} </p>
+                <p className=''> {character.gender} </p>
+                <StatusIndicator character={character} className='justify-center'/>
                 <p> Episodes: {character.episode.length} </p>
                 
             </div> </Link>)}

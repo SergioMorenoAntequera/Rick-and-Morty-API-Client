@@ -2,7 +2,7 @@
 type Character = {
     id: number,
     name: string,
-    status: string,
+    status: CharacterStatus,
     species: string,
     type: string,
     gender: string,
@@ -17,5 +17,7 @@ type Character = {
     },
     episode: string[]
 }
+
+export type CharacterStatus = 'Alive' | 'Dead' | 'unknown'
 
 export default Character

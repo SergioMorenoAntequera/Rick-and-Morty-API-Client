@@ -1,3 +1,5 @@
+import Header from '@/components/Header'
+import { SpoilerContext, useSpoilerContext } from '@/features/SpoilerContext'
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
@@ -14,20 +16,14 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (<>
     <QueryClientProvider client={queryClient}>
+     <SpoilerContext.Provider value={useSpoilerContext()}>
 
-
-      <div className='w-full border-b border-black p-4 flex gap-5'>
-        <div className='cursor-pointer mr-6' onClick={()=>router.push('/')}> Home </div>
-
-        <div className='cursor-pointer' onClick={()=>router.push('/character')}> Characters </div>
-        <div className='cursor-pointer' onClick={()=>router.push('/location')}> Locations </div>
-        <div className='cursor-pointer' onClick={()=>router.push('/episode')}> Episodes </div>
-      </div>
+      <Header/>
       
       <div className='p-4'>
         <Component {...pageProps} />
       </div>
-
+      </SpoilerContext.Provider>
     </QueryClientProvider>
   </>)
 }
