@@ -1,9 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import episodeAPI from '@/api/episode.api'
+import CharacterCard from '@/components/CharacterCard'
 import LabelList from '@/components/LabelList'
 import StatusIndicator from '@/components/StatusIndicator'
 import Character from '@/types/Character'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useQuery } from 'react-query'
@@ -32,13 +34,9 @@ function CharacterPage() {
             </div>
         </div>
         
-        <LabelList title='Characters in the episode:' 
+        <LabelList title='Characters in this episode:' 
             entityName='character' data={characters} 
-            renderEl={(character: Character) => <>
-                <p className='font-bold'> {character.name} </p>
-                <p className='opacity-75'> {character.species} </p>
-                <StatusIndicator character={character}/>
-            </>}
+            renderEl={(character: Character) => <CharacterCard key={character.id} character={character}/>}
         />
     </div>)
 }

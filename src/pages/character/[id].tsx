@@ -24,34 +24,76 @@ function CharacterPage() {
     
     if(!character) return
     return (<div>
+        <div className='text-center mb-14'>
+            <p className='text-6xl font-bold mb-6'> {character?.name} </p>
+            { character?.image  && <Image className='m-auto' width={300} height={300} src={character?.image ?? ''} alt={character?.name ?? ''}></Image>}
+        </div>
 
-        <div className='flex gap-6'>
+        <div className='border-container mb-14 grid grid-cols-3 rounded-full items-center justify-center p-0'>
+            <div className='p-4 text-center'> 
+                <span className='text-xl font-bold' title='Specie'> {character?.species}  </span> 
+            </div>  
+
+            <div className='p-4 text-center border-l border-black'> 
+                <span className='text-xl font-bold' title='Gender'> {character?.gender}  </span> 
+            </div>  
+            
+            <div className='p-4 border-l border-black'>
+                <StatusIndicator className='text-xl justify-center font-bold' character={character}/>
+            </div>  
+        </div>
+
+        <div className='border-container grid grid-cols-2 gap-14 p-12'>
             <div>
-                {character?.image && <Image width={300} height={300} src={character?.image ?? ''} alt={character?.name ?? ''}></Image>}
+                <p className='text-xl border-b pb-1 border-black mb-4'> Origin </p>
+                {!origin && 'Unknown...'}
+                {origin && <div className='grid grid-cols-3 gap-6 justify-evenly text-center'>
+                    <div>       
+                        <p className='font-bold'> Dimension </p>
+                        <Link className='text-blue-500' href={`/location/${origin?.id}`}> {origin?.name} </Link> 
+                    </div>
+
+                    <div>
+                        <p className='font-bold'> Type </p>
+                        <p> {origin?.type} </p> 
+                    </div>
+                    
+                    <div>
+                        <p className='font-bold'> Dimension </p>
+                        <p> {origin?.dimension} </p> 
+                    </div>
+                </div>}
             </div>
             <div>
-                <p className='text-3xl'> {character?.name}</p>
-                <p> {character?.gender}</p>
-                <p> {character?.species}</p>
-                <StatusIndicator character={character}/>
-                <p> 
-                    Is from: 
-                    <Link className='text-blue-500' href={`/location/${origin?.id}`}> {origin?.name} </Link> 
-                    a place in the {location?.dimension} dimension
-                    with {location?.residents.length} residents
-                </p>
-                <p> Last seen in: {location?.name}</p>
+                <p className='text-xl border-b pb-1 border-black mb-4'> Current Location </p>
+                {!location && 'Unknown...'}
+                {location && <div className='grid grid-cols-3 gap-6 justify-evenly text-center'>
+                    <div>       
+                        <p className='font-bold'> Dimension </p>
+                        <Link className='text-blue-500' href={`/location/${location?.id}`}> {location?.name} </Link> 
+                    </div>
+
+                    <div>
+                        <p className='font-bold'> Type </p>
+                        <p> {location?.type} </p> 
+                    </div>
+                    
+                    <div>
+                        <p className='font-bold'> Dimension </p>
+                        <p> {location?.dimension} </p> 
+                    </div>
+                </div>}
             </div>
         </div>
         
         
 
-        <LabelList title='Episodes where this charater is seen:' 
+        <LabelList className='mt-10' title='Episodes where this charater is seen:' 
             entityName='episode' data={episodes} 
-            renderEl={(episode: Episode) => <>
-                <p className='font-bold'> {episode.name} </p>
+            renderEl={(episode: Episode) => <div className='max-w-xs'>
+                <p className='font-bold truncate' title={episode.name}>  {episode.episode} - {episode.name} </p>
                 <p className='opacity-75'> Live on: {episode.air_date} </p>
-            </>}
+            </div>}
         />
 
 

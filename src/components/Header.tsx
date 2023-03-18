@@ -7,16 +7,16 @@ function Header() {
     const {spoilerProtection: showingSpoilers, toggleSpoilers} = useContext(SpoilerContext)
 
     return ( <>
-        <div className='h-16'> </div>
+        <div className='h-16 bg-gray-50'> </div>
 
         <div className='fixed z-50 top-0 bg-white w-full border-b border-black p-4  flex items-center justify-between'>
         
             <div className='flex gap-5'>
                 <div className='cursor-pointer mr-6 font-bold' onClick={()=>router.push('/')}> Home </div>
 
-                <div className='cursor-pointer' onClick={()=>router.push('/character')}> Characters </div>
-                <div className='cursor-pointer' onClick={()=>router.push('/location')}> Locations </div>
-                <div className='cursor-pointer' onClick={()=>router.push('/episode')}> Episodes </div>    
+                <div className={`cursor-pointer ${router.asPath.includes('character') ? 'font-bold' : ''}`} onClick={()=>router.push('/character')}> Characters </div>
+                <div className={`cursor-pointer ${router.asPath.includes('location') ? 'font-bold' : ''}`} onClick={()=>router.push('/location')}> Locations </div>
+                <div className={`cursor-pointer ${router.asPath.includes('episode') ? 'font-bold' : ''}`} onClick={()=>router.push('/episode')}> Episodes </div>    
             </div>
 
             <div className='top-0 flex items-center justify-center'>

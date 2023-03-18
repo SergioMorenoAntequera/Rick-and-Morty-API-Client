@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <Header/>
       
-      <div className='p-4'>
+      <div className='p-4 bg-gray-50'>
         <Component {...pageProps} />
       </div>
       </SpoilerContext.Provider>

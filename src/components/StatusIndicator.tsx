@@ -10,7 +10,7 @@ function StatusIndicator({character, status, className}: Props) {
     
     if(!status) <> </>
     const colorClass = status === 'Alive' ? 'bg-green-400' :  'bg-red-400'  
-    return (<div className={`flex items-center gap-2 ${className} ${spoilerProtection ? 'filter blur-sm' : ''}`}>
+    return (<div className={`flex items-center gap-2 ${className} ${spoilerProtection ? 'filter blur-md' : ''}`} title='Status'>
 
         <div className={`h-4 w-4 rounded-full ${!spoilerProtection ? colorClass : 'bg-gray-400'}`}/> 
         {status}

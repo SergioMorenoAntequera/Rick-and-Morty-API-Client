@@ -45,7 +45,7 @@ export default function useEntityPagination<T>(entityAPI: GenericAPI<T>) {
 
     const pagesToShow = getAroundNumbers(data?.info.page, 3, data?.info.pages)
 
-    const paginationControllerEl = <div className='flex gap-4 mb-6 items-center'>
+    const paginationControllerEl = <div className='border-container flex gap-4 mb-6 items-center'>
         <div className="mr-8">
             <p> Total of {entityAPI.entityName}s: {data?.info.count} </p>
             <p> Page where we are {data?.info.page} / {data?.info.pages} </p>

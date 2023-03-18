@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html, body {
+    @apply container bg-gray-50 mb-12
+}
+
+@layer components {
+    .border-container {
+        @apply bg-white p-4 border border-black rounded-md
+    }
+}

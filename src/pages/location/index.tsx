@@ -15,7 +15,7 @@ function CharacterPage() {
         <div className='grid grid-cols-5 gap-7 mb-10'>
             
             {locationList?.results?.map(location => <Link  key={location.id} href={`/${locationAPI.generic.entityName}/${location.id}`}>
-                <div className='text-center cursor-pointer relative rounded bg-gray-100 p-4 max-w-xs'>
+                <div className='border-container text-center cursor-pointer relative rounded p-4 max-w-xs'>
                 
                 <p className='truncate font-bold'> {location.name} </p>
                 <p className=''> {location.dimension} </p>

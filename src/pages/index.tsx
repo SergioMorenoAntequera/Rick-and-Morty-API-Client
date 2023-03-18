@@ -17,7 +17,7 @@ export default function Home() {
 
 
   return (<div className="text-center">
-    <h1 className="text-9xl font-bold mb-4"> Try one of this ones out </h1>
+    <h1 className="text-9xl font-bold mb-6"> Try one of this ones out </h1>
     <h2 className="text-4xl mb-10"> 
       <button className="p-2 bg-gray-300 rounded mr-4 hover:bg-gray-400 transition" onClick={()=>refetch()}> Click here </button>
        If you dont like any of this characters 
