@@ -22,6 +22,7 @@ function CharacterPage() {
         refetch()
     }, [id])
     
+    if(!character) return
     return (<div>
 
         <div className='flex gap-6'>

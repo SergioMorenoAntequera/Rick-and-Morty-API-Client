@@ -20,6 +20,7 @@ function CharacterPage() {
         refetch()
     }, [id])
     
+    if(!episode) return
     return (<div>
 
         <div className='flex gap-6'>
