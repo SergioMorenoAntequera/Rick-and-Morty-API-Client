@@ -16,7 +16,7 @@ function CharacterPage() {
         <div className='grid grid-cols-5 gap-7 mb-10'>
             
             {episodeList?.results?.map(episode => <Link  key={episode.id} href={`/${episodeAPI.generic.entityName}/${episode.id}`}>
-                <div className='border-container text-center cursor-pointer relative rounded p-4 max-w-xs'>
+                <div className='border-container hover text-center cursor-pointer relative rounded p-4 max-w-xs'>
                 
                 <p className='truncate font-bold'> {episode.name} </p>
                 <p> Characters: {episode.characters.length} </p>

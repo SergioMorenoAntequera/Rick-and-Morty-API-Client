@@ -10,4 +10,7 @@ html, body {
     .border-container {
         @apply bg-white p-4 border border-black rounded-md
     }
+    .border-container.hover {
+        @apply hover:bg-gray-100 cursor-pointer transition
+    }
 }

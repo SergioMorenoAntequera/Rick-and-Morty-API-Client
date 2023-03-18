@@ -20,7 +20,7 @@ function LabelList({title, entityName, data, renderEl, className}: Props) {
             
             {data?.map(dataEl => <Link key={dataEl.id} href={`/${entityName}/${dataEl.id}`}> 
                 
-                <div className='border-container'> 
+                <div className='hover:bg-gray-100 transition border-container hover'> 
                     {wayToRenderElement(dataEl)} 
                 </div>
 

@@ -56,7 +56,7 @@ export default function useEntityPagination<T>(entityAPI: GenericAPI<T>) {
         { pagesToShow.map(pageNumber => 
             <div key={pageNumber} 
                 className={`
-                    ${pageNumber === data?.info.page ? 'bg-blue-500 text-white': 'bg-gray-200'}
+                    ${pageNumber === data?.info.page ? 'bg-black text-white': 'bg-gray-200'}
                     w-6 h-6 rounded text-center cursor-pointer
                 `} 
                 onClick={()=>{goToPage(pageNumber)}}> 
