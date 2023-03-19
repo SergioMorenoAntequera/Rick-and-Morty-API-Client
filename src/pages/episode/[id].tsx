@@ -3,6 +3,7 @@
 import episodeAPI from '@/api/episode.api'
 import CharacterCard from '@/components/CharacterCard'
 import LabelList from '@/components/LabelList'
+import PillInfo from '@/components/PillInfo'
 import StatusIndicator from '@/components/StatusIndicator'
 import Character from '@/types/Character'
 import Image from 'next/image'
@@ -24,15 +25,15 @@ function CharacterPage() {
     
     if(!episode) return
     return (<div>
-
-        <div className='flex gap-6'>
-            <div>
-                <p className='text-3xl'> {episode?.name}</p>
-                <p> {episode?.episode}</p>
-                <p> {episode?.air_date}</p>
-                <p> {episode?.created}</p>
-            </div>
+        <div className='text-center mb-16'>
+            <p className='relative text-9xl font-bold mb-6 z-10'> {episode?.name} </p>
         </div>
+
+        <PillInfo gridCols='grid-cols-3'>
+            <p title='Episode'> {episode?.episode} </p>
+            <p title='Air Date'> {episode?.air_date}</p>
+            <p title='Characters'> {episode?.characters.length} Character{episode.characters.length > 1 ? 's':''} </p>
+        </PillInfo>
         
         <LabelList title='Characters in this episode:' 
             entityName='character' data={characters} 

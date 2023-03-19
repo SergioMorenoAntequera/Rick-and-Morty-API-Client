@@ -3,6 +3,7 @@
 import characterAPI from '@/api/character.api'
 import locationAPI from '@/api/location.api'
 import LabelList from '@/components/LabelList'
+import PillInfo from '@/components/PillInfo'
 import StatusIndicator from '@/components/StatusIndicator'
 import useResidentsList from '@/hooks/useResidentsList'
 import Episode from '@/types/Episodes'
@@ -33,20 +34,12 @@ function CharacterPage() {
             { character?.image  && <Image className='m-auto relative -top-14' width={300} height={300} src={character?.image ?? ''} alt={character?.name ?? ''}></Image>}
         </div>
 
-        <div className='border-container mb-14 grid grid-cols-3 rounded-full items-center justify-center p-0 overflow-hidden'>
-            <div className='p-4 text-center hover:bg-black hover:text-white transition'> 
-                <span className='text-xl font-bold' title='Specie'> {character?.species}  </span> 
-            </div>  
-
-            <div className='p-4 text-center border-l border-black hover:bg-black hover:text-white transition'> 
-                <span className='text-xl font-bold' title='Gender'> {character?.gender}  </span> 
-            </div>  
-            
-            <div className='p-4 border-l border-black hover:bg-black hover:text-white transition'>
-                <StatusIndicator className='text-xl justify-center font-bold' character={character}/>
-            </div>  
-        </div>
-
+        <PillInfo gridCols='grid-cols-3'>
+            <span title='Specie'> {character?.species}  </span> 
+            <span title='Gender'> {character?.gender}  </span> 
+            <StatusIndicator className='justify-center' character={character}/>
+        </PillInfo>
+        
         <div className='border-container grid grid-cols-2 gap-14 p-12'>
             <div>
                 <p className='text-xl border-b pb-1 border-black mb-4'> Origin </p>

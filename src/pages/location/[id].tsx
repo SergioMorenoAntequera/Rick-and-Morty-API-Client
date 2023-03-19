@@ -4,6 +4,7 @@ import characterAPI from '@/api/character.api'
 import locationAPI from '@/api/location.api'
 import CharacterCard from '@/components/CharacterCard'
 import LabelList from '@/components/LabelList'
+import PillInfo from '@/components/PillInfo'
 import StatusIndicator from '@/components/StatusIndicator'
 import Character from '@/types/Character'
 import Image from 'next/image'
@@ -26,15 +27,15 @@ function CharacterPage() {
     
     if(!location) return
     return (<div>
-
-        <div className='flex gap-6'>
-            <div>
-                <p className='text-3xl'> {location?.name}</p>
-                <p> {location?.dimension}</p>
-                <p> {location?.type}</p>
-                <p> {location?.created}</p>
-            </div>
+        <div className='text-center mb-16'>
+            <p className='relative text-9xl font-bold mb-6 z-10'> {location?.name} </p>
         </div>
+
+        <PillInfo gridCols='grid-cols-3'>
+            <p title='Dimension'> {location?.dimension} </p>
+            <p title='Type'> Type: {location?.type}</p>
+            <p title='Numero de residentes'> {location?.residents.length} Resident{location.residents.length > 1 ? 's':''} </p>
+        </PillInfo>
         
         <LabelList title='Residents of this place:' 
             entityName='character' data={residents} 

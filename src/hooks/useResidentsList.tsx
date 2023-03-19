@@ -27,7 +27,7 @@ export default function useResidentsList(location?: Location) {
             <span> { !show ? <FontAwesomeIcon icon={faCaretDown} /> : <FontAwesomeIcon icon={faCaretUp} /> }</span>
         </p>
 
-        { show && <div>
+        { show && <div className='max-h-40 overflow-auto'>
             {data?.map(char => <Link className='block hover:bg-gray-100 transition' href={`/character/${char.id}`} key={char.id}> 
                 <p className='p-1 last:bg-red-600'> {char.name} </p> 
             </Link>)}
