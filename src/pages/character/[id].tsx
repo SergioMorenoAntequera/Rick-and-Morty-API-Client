@@ -17,7 +17,7 @@ function CharacterPage() {
     const router = useRouter()
     const id = parseInt(router.query.id?.toString() ?? '')
 
-    const { data, refetch } = useQuery('character', () => id ? characterAPI.specific.getEverything(id) : null)
+    const { data, refetch } = useQuery('character', () => id ? characterAPI.getEverything(id) : null)
     const [character, origin, location, episodes] = (data ?? [])
 
     const { residentsListEl:originResidentsEl } = useResidentsList(origin ?? undefined)

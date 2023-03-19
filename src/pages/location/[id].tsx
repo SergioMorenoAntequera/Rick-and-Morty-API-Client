@@ -17,7 +17,7 @@ function CharacterPage() {
     const router = useRouter()
     const id = parseInt(router.query.id?.toString() ?? '')
 
-    const { isLoading, error, data, refetch } = useQuery('character', () => id ? locationAPI.specific.getEverything(id) : null)
+    const { isLoading, error, data, refetch } = useQuery('character', () => id ? locationAPI.getEverything(id) : null)
     const [location, residents] = (data ?? [])
 
     useEffect(() => {

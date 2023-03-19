@@ -12,7 +12,7 @@ export default function Home() {
   const router = useRouter()
 
   const { isLoading, error, data: randomCharacters, refetch } = useQuery('all', () => {
-    return Promise.all(getRandomNumbers(NUMBER_OF_RANDOM_CHARACTERS).map(number => characterAPI.generic.getById(number)))
+    return Promise.all(getRandomNumbers(NUMBER_OF_RANDOM_CHARACTERS).map(number => characterAPI.getById(number)))
   })
 
 

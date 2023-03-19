@@ -9,22 +9,19 @@ import { extractId } from "./utils"
 const entityName = 'character'
 
 const characterAPI = {
-    generic: constructClientConsumer<Character>(entityName),
-    specific: {
-        getEpisodes: (episodesUrls: string[]) => episodeAPI.generic.getManyById(episodesUrls.map(extractId)),
-        getLocation: (locationUrl: string) => locationUrl ? locationAPI.generic.getById(extractId(locationUrl)) : null,
-        getOrigin: (originUrl: string) => originUrl ? locationAPI.generic.getById(extractId(originUrl)) : null,
-        getEverything: (charaterId: number) => {
-            return characterAPI.generic.getById(charaterId)
-            .then(character => Promise.all([
-                new Promise<Character>(resolve => resolve(character)),
-                characterAPI.specific.getOrigin(character.origin.url),
-                characterAPI.specific.getLocation(character.location.url),
-                characterAPI.specific.getEpisodes(character.episode)
-            ]))
-        }
+    ...constructClientConsumer<Character>(entityName),
+    getEpisodes: (episodesUrls: string[]) => episodeAPI.getManyById(episodesUrls.map(extractId)),
+    getLocation: (locationUrl: string) => locationUrl ? locationAPI.getById(extractId(locationUrl)) : null,
+    getOrigin: (originUrl: string) => originUrl ? locationAPI.getById(extractId(originUrl)) : null,
+    getEverything: (charaterId: number) => {
+        return characterAPI.getById(charaterId)
+        .then(character => Promise.all([
+            new Promise<Character>(resolve => resolve(character)),
+            characterAPI.getOrigin(character.origin.url),
+            characterAPI.getLocation(character.location.url),
+            characterAPI.getEpisodes(character.episode)
+        ]))
     }
 }
-
 
 export default characterAPI

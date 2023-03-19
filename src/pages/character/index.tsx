@@ -8,14 +8,14 @@ import Link from 'next/link'
 
 function CharacterPage() {
     
-    const {data: charactersList, paginationControllerEl} = useEntityPagination<Character>(characterAPI.generic)
+    const {data: charactersList, paginationControllerEl} = useEntityPagination<Character>(characterAPI)
     
     return (<>
         { paginationControllerEl }
 
         <div className='grid grid-cols-5 gap-7 mb-10'>
             
-            {charactersList?.results?.map(character => <Link  key={character.id} href={`/${characterAPI.generic.entityName}/${character.id}`}>
+            {charactersList?.results?.map(character => <Link  key={character.id} href={`/${characterAPI.entityName}/${character.id}`}>
                 <div className='text-center cursor-pointer relative border-container hover max-w-xs '>
                 
                 

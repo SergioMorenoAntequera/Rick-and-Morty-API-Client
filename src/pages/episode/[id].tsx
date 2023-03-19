@@ -15,7 +15,7 @@ function CharacterPage() {
     const router = useRouter()
     const id = parseInt(router.query.id?.toString() ?? '')
 
-    const { isLoading, error, data, refetch } = useQuery('episode', () => id ? episodeAPI.specific.getEverything(id) : null)
+    const { isLoading, error, data, refetch } = useQuery('episode', () => id ? episodeAPI.getEverything(id) : null)
     const [episode, characters] = (data ?? [])
 
     useEffect(() => {

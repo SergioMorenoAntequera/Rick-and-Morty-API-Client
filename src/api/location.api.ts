@@ -8,16 +8,14 @@ import { extractId } from "./utils"
 const entityName = 'location'
 
 const locationAPI = {
-    generic: constructClientConsumer<Location>(entityName),
-    specific: {
-        getResidents: (residentsUrl: string[]) => characterAPI.generic.getManyById(residentsUrl.map(extractId)),
-        getEverything: (charaterId: number) => {
-            return locationAPI.generic.getById(charaterId)
-            .then(location => Promise.all([
-                new Promise<Location>(resolve => resolve(location)),
-                locationAPI.specific.getResidents(location.residents)
-            ]))
-        }
+    ...constructClientConsumer<Location>(entityName),
+    getResidents: (residentsUrl: string[]) => characterAPI.getManyById(residentsUrl.map(extractId)),
+    getEverything: (charaterId: number) => {
+        return locationAPI.getById(charaterId)
+        .then(location => Promise.all([
+            new Promise<Location>(resolve => resolve(location)),
+            locationAPI.getResidents(location.residents)
+        ]))
     }
 }
 

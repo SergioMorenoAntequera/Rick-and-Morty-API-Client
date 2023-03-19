@@ -11,7 +11,7 @@ import Location from '@/types/Location'
 export default function useResidentsList(location?: Location) {
     const cacheName = location?.name ?? '' 
 
-    const { data, refetch } = useQuery(cacheName, () => location?.residents ?  locationAPI.specific.getResidents(location?.residents) : null)
+    const { data, refetch } = useQuery(cacheName, () => location?.residents ?  locationAPI.getResidents(location?.residents) : null)
     const [show, setShow] = useState(false)
 
     function toggleShow() { setShow(!show) }
