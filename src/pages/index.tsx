@@ -1,10 +1,10 @@
 import { useRouter } from "next/router"
 import { useQuery } from "react-query"
-import characterAPI from "@/api/character.api"
 import getRandomNumbers from "@/utils/numberUtils"
 import Link from "next/link"
 import Image from "next/image"
 import StatusIndicator from "@/components/StatusIndicator"
+import CHARACTER_ENTITY from "@/features/rick-and-morty-api/entities/character.api"
 
 const NUMBER_OF_RANDOM_CHARACTERS = 8
 
@@ -12,7 +12,7 @@ export default function Home() {
   const router = useRouter()
 
   const { isLoading, error, data: randomCharacters, refetch } = useQuery('all', () => {
-    return Promise.all(getRandomNumbers(NUMBER_OF_RANDOM_CHARACTERS).map(number => characterAPI.getById(number)))
+    return Promise.all(getRandomNumbers(NUMBER_OF_RANDOM_CHARACTERS).map(number => CHARACTER_ENTITY.getById(number)))
   })
 
 

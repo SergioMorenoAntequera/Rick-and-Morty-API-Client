@@ -1,4 +1,4 @@
-import Character from '@/types/Character'
+import Character from '@/features/rick-and-morty-api/entities/character.type'
 import Image from 'next/image'
 import React from 'react'
 import StatusIndicator from './StatusIndicator'

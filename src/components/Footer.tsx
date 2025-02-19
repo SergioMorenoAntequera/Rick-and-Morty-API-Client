@@ -2,13 +2,17 @@ import Link from 'next/link'
 import React from 'react'
 
 function Footer() {
-  return (<div className='bg-gray-50 border-t border-solid'>
+  return (<div className='bg-gray-50 border-t border-black'>
     
-    <div className='container mx-auto z-50 top-0 border-b border-black p-4 flex items-center justify-between'>
-        <Link href='https://github.com/SergioMorenoAntequera'> Developed by Sergio Moreno Antequera </Link>
+    <div className='container mx-auto p-4'>
+      
+      <Link href='https://github.com/SergioMorenoAntequera' target='_blank'> 
+        Developed by 👉 Sergio Moreno Antequera 
+      </Link>
+
     </div>
 
-</div>)
+  </div>)
 }
 
 export default Footer

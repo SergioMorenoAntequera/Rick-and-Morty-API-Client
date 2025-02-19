@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 
-import ReactQueryProvider from './ReactQueryProvider'
-import SpoilerProtectionProvider from './SpoilerProtection'
+import ReactQueryProvider from './react-query/ReactQueryProvider'
+import SpoilerProtectionProvider from './spoiler-protection/SpoilerProtection'
 
 type ContextProviderProps = { children: ReactNode }
 const ContextProvider = ({ children }: ContextProviderProps) => {

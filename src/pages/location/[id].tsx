@@ -1,14 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import characterAPI from '@/api/character.api'
-import locationAPI from '@/api/location.api'
+import LOCATION_ENTITY from '@/features/rick-and-morty-api/entities/location.api'
 import CharacterCard from '@/components/CharacterCard'
 import LabelList from '@/components/LabelList'
 import PillInfo from '@/components/PillInfo'
-import StatusIndicator from '@/components/StatusIndicator'
-import Character from '@/types/Character'
-import Image from 'next/image'
-import Link from 'next/link'
+import Character from '@/features/rick-and-morty-api/entities/character.type'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useQuery } from 'react-query'
@@ -17,7 +13,7 @@ function CharacterPage() {
     const router = useRouter()
     const id = parseInt(router.query.id?.toString() ?? '')
 
-    const { isLoading, error, data, refetch } = useQuery('character', () => id ? locationAPI.getEverything(id) : null)
+    const { isLoading, error, data, refetch } = useQuery('character', () => id ? LOCATION_ENTITY.getEverything(id) : null)
     const [location, residents] = (data ?? [])
 
     useEffect(() => {

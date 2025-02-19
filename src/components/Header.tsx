@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { useRouter } from 'next/router'
-import { SpoilerProtectionContext } from '@/features/SpoilerProtection'
+import { SpoilerProtectionContext } from '@/features/spoiler-protection/SpoilerProtection'
 
 function Header() {
 

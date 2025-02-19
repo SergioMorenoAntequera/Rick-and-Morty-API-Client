@@ -1,17 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
-import locationAPI from "@/api/location.api"
+import LOCATION_ENTITY from "@/features/rick-and-morty-api/entities/location.api"
 import { useQuery } from "react-query"
 import Link from 'next/link'
 
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Location from '@/types/Location'
+import Location from '@/features/rick-and-morty-api/entities/location.type'
 
 export default function useResidentsList(location?: Location) {
     const cacheName = location?.name ?? '' 
 
-    const { data, refetch } = useQuery(cacheName, () => location?.residents ?  locationAPI.getResidents(location?.residents) : null)
+    const { data, refetch } = useQuery(cacheName, () => location?.residents ?  LOCATION_ENTITY.getResidents(location?.residents) : null)
     const [show, setShow] = useState(false)
 
     function toggleShow() { setShow(!show) }

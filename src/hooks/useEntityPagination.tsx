@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import GenericAPI from "@/types/GeneralAPI"
+import GenericEntity from "@/features/rick-and-morty-api/types/generic-entity"
 import { getAroundNumbers } from "@/utils/numberUtils"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { useQuery } from "react-query"
 
-export default function useEntityPagination<T>(entityAPI: GenericAPI<T>) {
+export default function useEntityPagination<T>(entityAPI: GenericEntity<T>) {
     const router = useRouter()
     const page = parseInt(router.query.page?.toString() ?? '1')
 

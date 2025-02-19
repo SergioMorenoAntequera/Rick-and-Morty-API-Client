@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import { SpoilerProtectionContext } from '@/features/SpoilerProtection'
-import Character, { CharacterStatus } from '@/types/Character'
+import { SpoilerProtectionContext } from '@/features/spoiler-protection/SpoilerProtection'
+import Character, { CharacterStatus } from '@/features/rick-and-morty-api/entities/character.type'
 
 type Props = {character?: Character, status?: CharacterStatus, className?: string}
 function StatusIndicator({character, status, className}: Props) {

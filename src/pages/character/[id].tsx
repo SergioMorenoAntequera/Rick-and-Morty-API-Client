@@ -1,23 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import characterAPI from '@/api/character.api'
-import locationAPI from '@/api/location.api'
 import LabelList from '@/components/LabelList'
 import PillInfo from '@/components/PillInfo'
 import StatusIndicator from '@/components/StatusIndicator'
 import useResidentsList from '@/hooks/useResidentsList'
-import Episode from '@/types/Episodes'
+import Episode from '@/features/rick-and-morty-api/entities/episodes.type'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
+import CHARACTER_ENTITY from '@/features/rick-and-morty-api/entities/character.api'
 
 function CharacterPage() {
     const router = useRouter()
     const id = parseInt(router.query.id?.toString() ?? '')
 
-    const { data, refetch } = useQuery('character', () => id ? characterAPI.getEverything(id) : null)
+    const { data, refetch } = useQuery('character', () => id ? CHARACTER_ENTITY.getEverything(id) : null)
     const [character, origin, location, episodes] = (data ?? [])
 
     const { residentsListEl:originResidentsEl } = useResidentsList(origin ?? undefined)

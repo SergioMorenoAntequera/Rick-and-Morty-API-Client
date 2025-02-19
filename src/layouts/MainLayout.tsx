@@ -1,7 +1,7 @@
 
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
-import ContextProvider from '@/features'
+import ContextProvider from '@/features/ContextProvider'
 import { ChildrenProp } from '@/types/utils.types'
 
 import React from 'react'
