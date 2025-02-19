@@ -4,18 +4,17 @@ import EPISODE_ENTITY from '@/features/rick-and-morty-api/entities/episode.api'
 import CharacterCard from '@/components/CharacterCard'
 import LabelList from '@/components/LabelList'
 import PillInfo from '@/components/PillInfo'
-import StatusIndicator from '@/components/StatusIndicator'
 import Character from '@/features/rick-and-morty-api/entities/character.type'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { useQuery } from 'react-query'
+import RICK_AND_MORTY_API from '@/features/rick-and-morty-api/main'
 
 function CharacterPage() {
     const router = useRouter()
     const id = parseInt(router.query.id?.toString() ?? '')
 
-    const { isLoading, error, data, refetch } = useQuery('episode', () => id ? EPISODE_ENTITY.getEverything(id) : null)
+    const { data, refetch } = useQuery('episode', () => id ? RICK_AND_MORTY_API.episodes.getEverything(id) : null)
     const [episode, characters] = (data ?? [])
 
     useEffect(() => {
