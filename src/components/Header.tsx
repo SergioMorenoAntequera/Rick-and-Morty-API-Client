@@ -1,10 +1,10 @@
 import { useContext } from 'react'
 import { useRouter } from 'next/router'
-import { SpoilerContext } from '@/features/SpoilerContext'
+import { SpoilerProtectionContext } from '@/features/SpoilerProtection'
 
 function Header() {
     const router = useRouter()
-    const {spoilerProtection: showingSpoilers, toggleSpoilers} = useContext(SpoilerContext)
+    const {spoilerProtection: showingSpoilers, toggleSpoilers} = useContext(SpoilerProtectionContext)
 
     return ( <>
         <div className='h-16 bg-gray-50'> </div>

@@ -1,12 +1,12 @@
 import { useContext } from 'react'
-import { SpoilerContext } from '@/features/SpoilerContext'
+import { SpoilerProtectionContext } from '@/features/SpoilerProtection'
 import Character, { CharacterStatus } from '@/types/Character'
 
 type Props = {character?: Character, status?: CharacterStatus, className?: string}
 function StatusIndicator({character, status, className}: Props) {
     status = status || character?.status
     
-    const { spoilerProtection } = useContext(SpoilerContext)
+    const { spoilerProtection } = useContext(SpoilerProtectionContext)
     
     if(!status) <> </>
     const colorClass = status === 'Alive' ? 'bg-green-400' :  'bg-red-400'  

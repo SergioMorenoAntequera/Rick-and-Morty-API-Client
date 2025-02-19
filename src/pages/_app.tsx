@@ -1,29 +1,28 @@
-import Header from '@/components/Header'
-import { SpoilerContext, useSpoilerContext } from '@/features/SpoilerContext'
-import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
-import { useRouter } from 'next/router'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import Header from '@/components/Header'
+import { ReactElement, ReactNode } from 'react'
+import { NextPage } from 'next'
 
-export default function App({ Component, pageProps }: AppProps) {
-  const router = useRouter()
+import '@/styles/globals.css'
+import ContextProvider from '@/features'
+
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode
+}
+ 
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}
+ 
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
+
+  const getLayout = Component.getLayout ?? (page => page)   
   
-  const queryClient = new QueryClient({defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false
-    },
-  }})
-
-  return (<>
-    <QueryClientProvider client={queryClient}>
-     <SpoilerContext.Provider value={useSpoilerContext()}>
-
-      <Header/>
-      
-      <div className='p-4 bg-gray-50'>
-        <Component {...pageProps} />
-      </div>
-      </SpoilerContext.Provider>
-    </QueryClientProvider>
-  </>)
+  return (<ContextProvider>
+  
+    <Header/>
+    {getLayout(<Component {...pageProps} />)}
+  
+  </ContextProvider>)
 }
