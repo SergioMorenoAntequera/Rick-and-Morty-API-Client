@@ -10,24 +10,24 @@ type Props = {
     className?: string
 }
 
-function LabelList({title, entityName, data, renderEl, className}: Props) {
-    const wayToRenderElement = renderEl ?? ((element: LinkLabel) => element.name)
+function LabelList({ title, entityName, data, renderEl, className }: Props) {
+  const wayToRenderElement = renderEl ?? ((element: LinkLabel) => element.name)
 
-    if(!data) return <></> 
-    return (<div className={className}>
-        <p className='text-2xl font-bold my-2'> {title} {data.length} </p>
-        <div className='flex flex-wrap gap-4'>
+  if(!data) return <></> 
+  return (<div className={className}>
+    <p className='text-2xl font-bold my-2'> {title} {data.length} </p>
+    <div className='flex flex-wrap gap-4'>
             
-            {data?.map(dataEl => <Link key={dataEl.id} href={`/${entityName}/${dataEl.id}`}> 
+      {data?.map(dataEl => <Link key={dataEl.id} href={`/${entityName}/${dataEl.id}`}> 
                 
-                <div className='hover:bg-gray-100 transition border-container hover'> 
-                    {wayToRenderElement(dataEl)} 
-                </div>
-
-            </Link>)}
-            
+        <div className='hover:bg-gray-100 transition border-container hover'> 
+          {wayToRenderElement(dataEl)} 
         </div>
-    </div>)
+
+      </Link>)}
+            
+    </div>
+  </div>)
 }
 
 export default LabelList

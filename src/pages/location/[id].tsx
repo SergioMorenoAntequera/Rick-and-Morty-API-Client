@@ -8,35 +8,35 @@ import { useQuery } from 'react-query'
 import RICK_AND_MORTY_API from '@/features/rick-and-morty-api/main'
 
 function CharacterPage() {
-    const router = useRouter()
-    const id = parseInt(router.query.id?.toString() ?? '')
+  const router = useRouter()
+  const id = parseInt(router.query.id?.toString() ?? '')
 
-    const { isLoading, error, data, refetch } = useQuery('character', () => id ? RICK_AND_MORTY_API.locations.getEverything(id) : null)
-    const [location, residents] = (data ?? [])
+  const { isLoading, error, data, refetch } = useQuery('character', () => id ? RICK_AND_MORTY_API.locations.getEverything(id) : null)
+  const [ location, residents ] = (data ?? [])
 
-    useEffect(() => {
-        if(!id) return
-        refetch()
-    }, [id])
+  useEffect(() => {
+    if(!id) return
+    refetch()
+  }, [ id ])
     
-    if(!location) return
-    return (<div>
-        <div className='text-center mb-16'>
-            <p className='relative text-9xl font-bold mb-6 z-10'> {location?.name} </p>
-        </div>
+  if(!location) return
+  return (<div>
+    <div className='text-center mb-16'>
+      <p className='relative text-9xl font-bold mb-6 z-10'> {location?.name} </p>
+    </div>
 
-        <PillInfo gridCols='grid-cols-3'>
-            <p title='Dimension'> {location?.dimension} </p>
-            <p title='Type'> Type: {location?.type}</p>
-            <p title='Numero de residentes'> {location?.residents.length} Resident{location.residents.length > 1 ? 's':''} </p>
-        </PillInfo>
+    <PillInfo gridCols='grid-cols-3'>
+      <p title='Dimension'> {location?.dimension} </p>
+      <p title='Type'> Type: {location?.type}</p>
+      <p title='Numero de residentes'> {location?.residents.length} Resident{location.residents.length > 1 ? 's':''} </p>
+    </PillInfo>
         
-        <LabelList title='Residents of this place:' 
-            entityName='character' data={residents} 
-            renderEl={(character: Character) => <CharacterCard key={character.id} character={character}/>}
-        />
+    <LabelList title='Residents of this place:' 
+      entityName='character' data={residents} 
+      renderEl={(character: Character) => <CharacterCard key={character.id} character={character}/>}
+    />
 
-    </div>)
+  </div>)
 }
 
 export default CharacterPage

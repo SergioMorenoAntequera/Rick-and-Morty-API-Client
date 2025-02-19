@@ -4,9 +4,9 @@ import LOCATION_ENTITY from "./entities/location.api"
 
 
 const RICK_AND_MORTY_API = {
-    characters: CHARACTER_ENTITY,
-    episodes: EPISODE_ENTITY,
-    locations: LOCATION_ENTITY,
+  characters: CHARACTER_ENTITY,
+  episodes: EPISODE_ENTITY,
+  locations: LOCATION_ENTITY,
 }
 
 

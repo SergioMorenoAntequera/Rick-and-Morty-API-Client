@@ -8,19 +8,19 @@ import React from 'react'
 
 function MainLayout({ children }: ChildrenProp) {
     
-    return (<ContextProvider>
-        <div className='flex flex-col min-h-screen'>
+  return (<ContextProvider>
+    <div className='flex flex-col min-h-screen'>
         
-            <Header />
+      <Header />
 
-            <div className='container mx-auto flex-1 py-4'>
-                {children}
-            </div>
+      <div className='container mx-auto flex-1 py-4'>
+        {children}
+      </div>
             
-            <Footer />
+      <Footer />
 
-        </div>
-    </ContextProvider>)
+    </div>
+  </ContextProvider>)
 }
 
 export default MainLayout

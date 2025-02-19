@@ -1,15 +1,15 @@
 
 export default function getRandomNumbers(amountOfNumbers = 6, limit = 800) {
-  const nums:number[] = [];
+  const nums:number[] = []
   for (let i = 0; i < amountOfNumbers; i++) {
-    const num = Math.floor(Math.random() * limit) + 1;
+    const num = Math.floor(Math.random() * limit) + 1
     if(nums.includes(num)) {
-      i--;
+      i--
       continue
     }
-    nums.push(num);
+    nums.push(num)
   }
-  return nums;
+  return nums
 }
 
 export function getAroundNumbers(num?: number, limit?: number, maxNumber?: number) {
@@ -17,9 +17,9 @@ export function getAroundNumbers(num?: number, limit?: number, maxNumber?: numbe
   limit = limit ?? 2
   if(!num) return []
   
-  var arr = [];
-  for (var i = Math.max(num - limit, 1); i <= Math.min(num + limit, maxNumber); i++) {
-    arr.push(i);
+  const arr = []
+  for (let i = Math.max(num - limit, 1); i <= Math.min(num + limit, maxNumber); i++) {
+    arr.push(i)
   }
-  return arr;
+  return arr
 }
