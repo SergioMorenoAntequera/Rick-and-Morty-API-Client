@@ -1,19 +1,19 @@
-import { createContext, ReactNode, useState } from "react";
+import { ChildrenProp } from "@/types/utils.types";
+import { createContext, useState } from "react";
   
 export const SpoilerProtectionContext = createContext({
-    spoilerProtection: false,
+    showingSpoilers: false,
     toggleSpoilers: () => {},
 });
 
-type SpoilerProtectionProviderProps = { children: ReactNode }
-const SpoilerProtectionProvider = ({ children }: SpoilerProtectionProviderProps) => {
+const SpoilerProtectionProvider = ({ children }: ChildrenProp) => {
     
     const [spoilerProtection, setShowingSpoilers] = useState(true);
 
     const toggleSpoilers = () => setShowingSpoilers((prev) => !prev);
 
     return <SpoilerProtectionContext.Provider value={{
-        spoilerProtection,
+        showingSpoilers: spoilerProtection,
         toggleSpoilers
     }}>
         {children}

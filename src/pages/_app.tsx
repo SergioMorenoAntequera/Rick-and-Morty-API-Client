@@ -1,10 +1,9 @@
-import type { AppProps } from 'next/app'
-import Header from '@/components/Header'
 import { ReactElement, ReactNode } from 'react'
 import { NextPage } from 'next'
+import type { AppProps } from 'next/app'
+import MainLayout from '@/layouts/MainLayout'
 
-import '@/styles/globals.css'
-import ContextProvider from '@/features'
+import '@/styles/main.css'
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -12,17 +11,11 @@ export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
  
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout
-}
- 
+} 
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
-  const getLayout = Component.getLayout ?? (page => page)   
+  const getLayout = Component.getLayout ?? (page => <MainLayout>{page}</MainLayout>)   
   
-  return (<ContextProvider>
-  
-    <Header/>
-    {getLayout(<Component {...pageProps} />)}
-  
-  </ContextProvider>)
+  return getLayout(<Component {...pageProps} />)
 }
