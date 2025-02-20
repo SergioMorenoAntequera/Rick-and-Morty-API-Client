@@ -6,11 +6,11 @@ import { extractPageNumber } from "./url-data-collection"
 export const manyRecordsProxy = <T>(entityName: string, data: any): MultipleEntityResponse<T> => {
 
   const nextFunction = data.info.next 
-    ? () => getAll<T>(entityName, extractPageNumber(data.info.next)) 
+    ? () => getAll<T>(entityName, {page: extractPageNumber(data.info.next)}) 
     : undefined
     
   const prevFunction = data.info.prev
-    ? () => getAll<T>(entityName, extractPageNumber(data.info.prev)) 
+    ? () => getAll<T>(entityName, {page: extractPageNumber(data.info.prev)}) 
     : undefined
 
   const page = 
