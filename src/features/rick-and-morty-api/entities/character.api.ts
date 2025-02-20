@@ -1,4 +1,4 @@
-import Character from "@/features/rick-and-morty-api/entities/character.type"
+import Character from "@/features/rick-and-morty-api/types/character.type"
 import EPISODE_ENTITY from "./episode.api"
 import { extractId } from "../utils/url-data-collection"
 import LOCATION_ENTITY from "./location.api"

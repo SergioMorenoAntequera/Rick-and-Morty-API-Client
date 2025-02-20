@@ -1,5 +1,5 @@
 import useEntityPagination from '@/hooks/useEntityPagination'
-import Episode from '@/features/rick-and-morty-api/entities/episodes.type'
+import Episode from '@/features/rick-and-morty-api/types/episodes.type'
 import Image from 'next/image'
 import Link from 'next/link'
 import RICK_AND_MORTY_API from '@/features/rick-and-morty-api/main'

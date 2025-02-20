@@ -1,4 +1,4 @@
-import Episode from "@/features/rick-and-morty-api/entities/episodes.type"
+import Episode from "@/features/rick-and-morty-api/types/episodes.type"
 import constructClientConsumer from "../client.api"
 import { extractId } from "../utils/url-data-collection"
 import CHARACTER_ENTITY from "./character.api"

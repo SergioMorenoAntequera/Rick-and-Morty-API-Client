@@ -1,4 +1,8 @@
 
+export type MultipleEntityParams = Partial<{
+    page: number
+    name: string   
+}>
 
 type MultipleEntityResponse<T> = {
     info: {

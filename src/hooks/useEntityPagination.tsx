@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import GenericEntity from "@/features/rick-and-morty-api/types/generic-entity"
-import { getAroundNumbers } from "@/utils/numberUtils"
+import { getAroundNumbers } from "@/utils/number.utils"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { useQuery } from "react-query"
@@ -10,7 +10,7 @@ export default function useEntityPagination<T>(entityAPI: GenericEntity<T>) {
   const router = useRouter()
   const page = parseInt(router.query.page?.toString() ?? '1')
 
-  const { isLoading, error, data: result, refetch } = useQuery('selectedAPI', () => entityAPI.getAll(page) )
+  const { isLoading, error, data: result, refetch } = useQuery('selectedAPI', () => entityAPI.getAll({page}) )
   const [ data, setData ] = useState(result)
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function useEntityPagination<T>(entityAPI: GenericEntity<T>) {
     setData(newReponse)
   }
   async function goToPage(page: number) {
-    const newReponse =  await entityAPI.getAll(page)
+    const newReponse =  await entityAPI.getAll({page})
     router.push('?page='+page, undefined, { shallow: true })
     setData(newReponse)
   }

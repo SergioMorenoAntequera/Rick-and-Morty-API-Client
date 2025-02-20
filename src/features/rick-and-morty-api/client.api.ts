@@ -1,4 +1,4 @@
-import MultipleEntityResponse from "@/features/rick-and-morty-api/types/multiple-entity-response"
+import MultipleEntityResponse, { MultipleEntityParams } from "@/features/rick-and-morty-api/types/multiple-entity"
 import GenericEntity from "@/features/rick-and-morty-api/types/generic-entity"
 import axios from "axios"
 import { manyRecordsProxy } from "./utils/convertion"
@@ -8,8 +8,13 @@ import { manyRecordsProxy } from "./utils/convertion"
 
 const AXIOS_CLIENT = axios.create({ baseURL: 'https://rickandmortyapi.com/api/', timeout: 1000 })
 
-export function getAll<T>(entityName: string, page?: number): Promise<MultipleEntityResponse<T>> {
-  return AXIOS_CLIENT.get(`${entityName}?page=${page}`).then(res => manyRecordsProxy<T>(entityName, res.data))
+export function getAll<T>(entityName: string, params?: MultipleEntityParams): Promise<MultipleEntityResponse<T>> {
+  
+  let urlParams = params 
+    ? '?' + Object.entries(params).reduce((acc, curr) => acc += `${curr[0]}=${curr[1]}&`, '') 
+    : ''
+
+  return AXIOS_CLIENT.get(`${entityName}${urlParams}`).then(res => manyRecordsProxy<T>(entityName, res.data))
 }
 
 export function getById<T>(entityName: string, idTofetch: number): Promise<T> {
@@ -25,7 +30,7 @@ export function getManyById<T>(entityName: string, idsToFetch: number[]): Promis
 function constructClientConsumer<EntityType>(entityName: string): GenericEntity<EntityType> {
   return ({
     entityName,
-    getAll: (page?: number) => getAll<EntityType>(entityName, page),
+    getAll: (params?: MultipleEntityParams) => getAll<EntityType>(entityName, params),
     getById: (idTofetch: number) => getById<EntityType>(entityName, idTofetch),
     getManyById: (idsTofetch: number[]) => getManyById<EntityType>(entityName, idsTofetch)
   })

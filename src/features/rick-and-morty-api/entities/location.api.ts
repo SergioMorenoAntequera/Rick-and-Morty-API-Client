@@ -1,4 +1,4 @@
-import Location from "@/features/rick-and-morty-api/entities/location.type"
+import Location from "@/features/rick-and-morty-api/types/location.type"
 import CHARACTER_ENTITY from "./character.api"
 import constructClientConsumer from "../client.api"
 import { extractId } from "../utils/url-data-collection"

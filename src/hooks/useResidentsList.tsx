@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Location from '@/features/rick-and-morty-api/entities/location.type'
+import Location from '@/features/rick-and-morty-api/types/location.type'
 import RICK_AND_MORTY_API from '@/features/rick-and-morty-api/main'
 
 export default function useResidentsList(location?: Location) {

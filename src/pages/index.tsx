@@ -1,6 +1,6 @@
 import { useRouter } from "next/router"
 import { useQuery } from "react-query"
-import getRandomNumbers from "@/utils/numberUtils"
+import getRandomNumbers from "@/utils/number.utils"
 import Link from "next/link"
 import Image from "next/image"
 import StatusIndicator from "@/components/StatusIndicator"

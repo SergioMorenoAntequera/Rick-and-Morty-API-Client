@@ -1,9 +1,9 @@
 
-import MultipleEntityResponse from "./multiple-entity-response"
+import MultipleEntityResponse, { MultipleEntityParams } from "./multiple-entity"
 
 type GenericEntity<T> = {
     entityName: string
-    getAll: (page?: number) => Promise<MultipleEntityResponse<T>>
+    getAll: (params?: MultipleEntityParams) => Promise<MultipleEntityResponse<T>>
     getById: (idTofetch: number) => Promise<T> 
     getManyById: (idsTofetch: number[]) => Promise<T[]>
 }

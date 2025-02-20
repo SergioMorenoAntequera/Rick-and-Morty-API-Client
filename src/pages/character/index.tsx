@@ -1,6 +1,6 @@
 import StatusIndicator from '@/components/StatusIndicator'
 import useEntityPagination from '@/hooks/useEntityPagination'
-import Character from '@/features/rick-and-morty-api/entities/character.type'
+import Character from '@/features/rick-and-morty-api/types/character.type'
 import Image from 'next/image'
 import Link from 'next/link'
 import RICK_AND_MORTY_API from '@/features/rick-and-morty-api/main'

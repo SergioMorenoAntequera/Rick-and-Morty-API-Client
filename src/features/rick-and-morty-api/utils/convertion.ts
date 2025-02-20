@@ -1,5 +1,5 @@
 import { getAll } from "../client.api"
-import MultipleEntityResponse from "../types/multiple-entity-response"
+import MultipleEntityResponse from "../types/multiple-entity"
 import { extractPageNumber } from "./url-data-collection"
 
 // PROXY //////////////////////////////////////////////////////////////////////////////////////////////
