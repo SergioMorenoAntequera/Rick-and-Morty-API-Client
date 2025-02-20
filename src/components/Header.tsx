@@ -1,8 +1,20 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { useRouter } from 'next/router'
 import { SpoilerProtectionContext } from '@/features/spoiler-protection/SpoilerProtection'
+import RICK_AND_MORTY_API from '@/features/rick-and-morty-api/main'
+import { useQuery } from 'react-query'
+import useDebouncedState from '@/hooks/useDebouncedState'
 
 function Header() {
+
+  const [ name, setName, debouncedName ] = useDebouncedState('', 500)
+
+  const { isLoading, data } = useQuery(
+    ['nameSearchResults', debouncedName], 
+    () => RICK_AND_MORTY_API.getByName(debouncedName),
+    {enabled: !!debouncedName}
+  ) 
+
 
   const router = useRouter()
   const { showingSpoilers, toggleSpoilers } = useContext(SpoilerProtectionContext)
@@ -17,6 +29,14 @@ function Header() {
         <div className={`cursor-pointer ${router.asPath.includes('character') ? 'font-bold' : ''}`} onClick={()=>router.push('/character')}> Characters </div>
         <div className={`cursor-pointer ${router.asPath.includes('location') ? 'font-bold' : ''}`} onClick={()=>router.push('/location')}> Locations </div>
         <div className={`cursor-pointer ${router.asPath.includes('episode') ? 'font-bold' : ''}`} onClick={()=>router.push('/episode')}> Episodes </div>    
+      
+        <div className='relative'>
+          <input type="text" className='border border-black' value={name} onChange={e => {setName(e.target.value)}}/>
+          { !!name && <div className='absolute top-full w-full bg-red-500'>
+            { !!isLoading && 'loading...' }
+            { !isLoading && data?.length }
+          </div> }
+        </div>
       </div>
 
       <div className='top-0 flex items-center justify-center'>
