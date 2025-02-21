@@ -13,9 +13,9 @@ function MainLayout({ children }: ChildrenProp) {
         
       <Header />
 
-      <div className='container mx-auto flex-1 py-4'>
+      <main className='container mx-auto flex-1 py-4'>
         {children}
-      </div>
+      </main>
             
       <Footer />
 

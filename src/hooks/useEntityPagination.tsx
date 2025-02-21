@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import GenericEntity from "@/features/rick-and-morty-api/types/generic-entity"
+import { extractPageNumber, extractParam } from "@/features/rick-and-morty-api/utils/url-data-collection"
 import { getAroundNumbers } from "@/utils/number.utils"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
@@ -8,9 +9,13 @@ import { useQuery } from "react-query"
 
 export default function useEntityPagination<T>(entityAPI: GenericEntity<T>) {
   const router = useRouter()
-  const page = parseInt(router.query.page?.toString() ?? '1')
+  const page = parseInt(extractParam(router.asPath, "name") || '1')
+  const name = extractParam(router.asPath, "name")
 
-  const { isLoading, error, data: result, refetch } = useQuery('selectedAPI', () => entityAPI.getAll({page}) )
+  const { isLoading, error, data: result, refetch } = useQuery(
+    ['selectedAPI', page, name], 
+    () => entityAPI.getAll({page, name})
+  )
   const [ data, setData ] = useState(result)
 
   useEffect(() => {
@@ -56,9 +61,9 @@ export default function useEntityPagination<T>(entityAPI: GenericEntity<T>) {
     { pagesToShow.map(pageNumber => 
       <div key={pageNumber} 
         className={`
-                    ${pageNumber === data?.info.page ? 'bg-black text-white': 'bg-gray-200'}
-                    w-6 h-6 rounded text-center cursor-pointer
-                `} 
+          ${pageNumber === data?.info.page ? 'bg-black text-white': 'bg-gray-200'}
+          w-6 h-6 rounded text-center cursor-pointer
+        `} 
         onClick={()=>{goToPage(pageNumber)}}> 
         {pageNumber} 
       </div>)}
