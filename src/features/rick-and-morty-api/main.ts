@@ -14,8 +14,8 @@ const RICK_AND_MORTY_API = {
 
     const data = await Promise.allSettled([
       RICK_AND_MORTY_API.characters.getAll({name}),
-      RICK_AND_MORTY_API.episodes.getAll({name}),
       RICK_AND_MORTY_API.locations.getAll({name}),
+      RICK_AND_MORTY_API.episodes.getAll({name}),
     ]).then(r => r.map(entity => {
         if(entity.status === "rejected") return []
         return entity.value.results
@@ -23,8 +23,8 @@ const RICK_AND_MORTY_API = {
     )
     return {
       character: data[0] as Character[],
-      episode: data[1] as Episode[],
-      location: data[2] as Location[],
+      location: data[1] as Location[],
+      episode: data[2] as Episode[],
     }
   }
 } as const

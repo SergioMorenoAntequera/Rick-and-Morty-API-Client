@@ -1,78 +1,77 @@
 
 import { useRouter } from 'next/router'
-import React, { FocusEvent, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useQuery } from 'react-query'
 import RICK_AND_MORTY_API from '../main'
 import { capitalizeFirstLetter, pluralize } from '@/utils/string.utils'
+import { extractParam } from '../utils/url-data-collection'
+import useClickOutside from '@/hooks/useClickOutside'
+
+const LIMIT_TO_SHOW = 5
 
 function SearchBar() {
   const router = useRouter()
-    
-  const paramName = router.query.name?.toString() ?? ''
-  const [ name, setName ] = useState(paramName)
+  const nameParam = extractParam(router.asPath, 'name')
+  
+  const [ name, setName ] = useState(nameParam)
   const [isInputOnFocus, setIsInputOnFocus] = useState(false)
-  const element = useRef<HTMLDivElement>(null)
 
   const { isLoading, data: searchResult } = useQuery(
     ['nameSearchResults', name], 
     () => RICK_AND_MORTY_API.getByName(name),
     {enabled: !!name}
   ) 
-  
-  function handleSearchBarFocus(e: FocusEvent<HTMLDivElement>) {
-    console.log(e.type);
-    if(e.type === 'focus') {
-      setIsInputOnFocus(true)
-      return
-    }
 
-    const clickedInComponent = element.current?.contains(e.target)
-    if(e.type === 'blur' && !clickedInComponent) {
-      setIsInputOnFocus(false)
-      return
-    }
-  }
+  const searchBarRef = useClickOutside(() => { setIsInputOnFocus(false) })
 
   const thereIsData = !!searchResult && Object.values(searchResult).find(e => e.length)
-  
-  const LIMIT_TO_SHOW = 5
 
-
-  return (<div className='relative w-96' ref={element} 
-    onFocus={(e) => { handleSearchBarFocus(e) }} 
-    onBlur={(e) => { handleSearchBarFocus(e) }}
-  >
-    <input type="text" placeholder='Search here' 
+  return (<div className='relative w-96' ref={searchBarRef} onFocus={(e) => { setIsInputOnFocus(true) }}>
+    
+    <input 
+      type="text" 
+      placeholder='Search here' 
       className='border border-black px-4 py-2 rounded-full w-full'  
       value={name} onChange={e => {setName(e.target.value)}}
     />
     
-    { isInputOnFocus && name && <div className='absolute top-full w-full bg-white shadow-lg'>
+    { isInputOnFocus && name && <div className='absolute top-full w-full bg-white shadow-lg rounded-lg'>
       
       { isLoading && <div className='flex items-center px-4 py-2'> Loading... </div> }
       
-      { !isLoading && thereIsData && Object.entries(searchResult).map(([key, data]) => {
-        if(!data.length) return <></>
-        
-        return <div key={key}>
-          <div className='px-4 py-2 bg-gray-400'> 
-            {capitalizeFirstLetter(pluralize(key, data.length))}: 
+      { !isLoading && !thereIsData && <div className='flex items-center px-4 py-2'> Nothing found... 😬 </div> }
+
+      { !isLoading && thereIsData && <div className='flex flex-col py-4 gap-5'>
+        { Object.entries(searchResult).map(([key, data]) => {
+          if(!data.length) return <></>
+          
+          return <div key={key}>
+            <div className='px-4 mb-1 text-sm flex items-center justify-between'> 
+              
+              <span className='text-gray-800 font-bold'>
+                {capitalizeFirstLetter(pluralize(key, data.length))}
+              </span>
+              
+              {data.length > LIMIT_TO_SHOW && 
+                <a href={`/${key}?name=${name}`} 
+                  className='hover:text-gray-800 transition cursor-pointer'> 
+                  see more 
+                </a>
+              }
+              
+            </div>
+
+            {data.slice(0, LIMIT_TO_SHOW).map(entity => 
+              <a href={`/${key}/${entity.id}`} key={entity.id} 
+                className='block px-4 py-1 hover:text-gray-800 hover:bg-gray-100 transition cursor-pointer'> 
+                {entity.name} 
+              </a>
+            )}
           </div>
-
-          {data.slice(0, LIMIT_TO_SHOW).map(entity => 
-            <a href={`/${key}/${entity.id}`} key={entity.id} className='block px-2 py-1 hover:bg-gray-100 transition cursor-pointer'> {entity.name} </a>
-          )}
-
-          {data.length > LIMIT_TO_SHOW && 
-            <a href={`/${key}?name=${name}`} className='block px-2 py-1 hover:bg-gray-100 transition cursor-pointer'> See all </a>
-          }
-        </div>
-      })}
-
-      {!isLoading && !thereIsData && <div className='flex items-center px-4 py-2'> Nothing found... 😬 </div> }
-
-    </div> }
-    </div>)
+        })}
+      </div>}
+    </div>}
+  </div>)
 }
 
 export default SearchBar
