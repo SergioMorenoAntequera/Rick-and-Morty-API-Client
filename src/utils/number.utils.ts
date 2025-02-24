@@ -17,9 +17,9 @@ export function getAroundNumbers(num?: number, limit?: number, maxNumber?: numbe
   limit = limit ?? 2
   if(!num) return []
   
-  const arr = []
+  const numbers = []
   for (let i = Math.max(num - limit, 1); i <= Math.min(num + limit, maxNumber); i++) {
-    arr.push(i)
+    numbers.push(i)
   }
-  return arr
+  return numbers
 }

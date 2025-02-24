@@ -1,7 +1,11 @@
 
 export function extractParam(url: string, param: string) {
   if(!url.includes(`${param}=`)) return ''
-  return url.substring(url.indexOf(`${param}=`) + param.length + 1)
+
+  const paramsFromSelected = url.substring(url.indexOf(`${param}=`) + param.length + 1)
+  const nextParamIndex = paramsFromSelected.indexOf('&')
+
+  return nextParamIndex !== -1 ? paramsFromSelected.substring(0, nextParamIndex) : paramsFromSelected
 }
 
 export function extractPageNumber(url: string) {

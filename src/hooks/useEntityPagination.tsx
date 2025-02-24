@@ -9,44 +9,27 @@ import { useQuery } from "react-query"
 
 export default function useEntityPagination<T>(entityAPI: GenericEntity<T>) {
   const router = useRouter()
-  const page = parseInt(extractParam(router.asPath, "name") || '1')
+  const page = parseInt(extractParam(router.asPath, "page") || '1')
   const name = extractParam(router.asPath, "name")
 
-  const { isLoading, error, data: result, refetch } = useQuery(
+  const { isLoading, error, data } = useQuery(
     ['selectedAPI', page, name], 
-    () => entityAPI.getAll({page, name})
+    () => entityAPI.getAll({ page, name })
   )
-  const [ data, setData ] = useState(result)
-
-  useEffect(() => {
-    if(!router) return
-    refetch()
-  }, [ router ])
-    
-
-  useEffect(() => {
-    if(!result) return
-    setData(result)
-  }, [ result ])
 
   async function showPrev() {
     if(!data?.info.prev) return
-    const newReponse =  await data?.info.prev()
-    router.push('?page='+newReponse.info.page, undefined, { shallow: true })
-    setData(newReponse)
-  }
-  async function showNext() {
-    if(!data?.info.next) return
-    const newReponse =  await data?.info.next()
-    router.push('?page='+newReponse.info.page, undefined, { shallow: true })
-    setData(newReponse)
-  }
-  async function goToPage(page: number) {
-    const newReponse =  await entityAPI.getAll({page})
-    router.push('?page='+page, undefined, { shallow: true })
-    setData(newReponse)
+    router.replace({ query: { ...router.query, page: page - 1, name }})
   }
 
+  async function showNext() {
+    if(!data?.info.next) return
+    router.replace({ query: { ...router.query, page: page + 1, name }})
+  }
+
+  async function goToPage(page: number) {
+    router.replace({ query: { ...router.query, page: page, name }})
+  }
 
   const pagesToShow = getAroundNumbers(data?.info.page, 3, data?.info.pages)
 
@@ -64,7 +47,7 @@ export default function useEntityPagination<T>(entityAPI: GenericEntity<T>) {
           ${pageNumber === data?.info.page ? 'bg-black text-white': 'bg-gray-200'}
           w-6 h-6 rounded text-center cursor-pointer
         `} 
-        onClick={()=>{goToPage(pageNumber)}}> 
+        onClick={()=>{ goToPage(pageNumber) }}> 
         {pageNumber} 
       </div>)}
         
