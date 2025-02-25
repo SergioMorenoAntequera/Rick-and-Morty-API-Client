@@ -1,4 +1,4 @@
-import useEntityPagination from '@/hooks/useEntityPagination'
+import useEntityPagination from '@/features/rick-and-morty-api/hooks/useEntityPagination'
 import Location from '@/features/rick-and-morty-api/types/location.type'
 import Link from 'next/link'
 import RICK_AND_MORTY_API from '@/features/rick-and-morty-api/main'

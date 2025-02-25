@@ -3,7 +3,7 @@
 import LabelList from '@/components/LabelList'
 import PillInfo from '@/components/PillInfo'
 import StatusIndicator from '@/components/StatusIndicator'
-import useResidentsList from '@/hooks/useResidentsList'
+import useResidentsList from '@/features/rick-and-morty-api/hooks/useResidentsList'
 import Episode from '@/features/rick-and-morty-api/types/episodes.type'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -16,15 +16,14 @@ function CharacterPage() {
   const router = useRouter()
   const id = parseInt(router.query.id?.toString() ?? '')
 
-  const { data, refetch } = useQuery('character', () => id ? RICK_AND_MORTY_API.characters.getEverything(id) : null)
+  const { data } = useQuery(
+    ['character', id], 
+    () => id ? RICK_AND_MORTY_API.characters.getEverything(id) : null
+  )
   const [ character, origin, location, episodes ] = (data ?? [])
 
   const { residentsListEl: originResidentsEl } = useResidentsList(origin ?? undefined)
   const { residentsListEl: locationResidentsEl } = useResidentsList(location ?? undefined)
-
-  useEffect(() => {
-    if(id) refetch()
-  }, [ id ])
 
   if(!character) return
   return (<div>
@@ -88,8 +87,6 @@ function CharacterPage() {
       </div>
     </div>
         
-        
-
     <LabelList className='mt-10' title='Episodes where this charater is seen:' 
       entityName='episode' data={episodes} 
       renderEl={(episode: Episode) => <div className='max-w-xs'>

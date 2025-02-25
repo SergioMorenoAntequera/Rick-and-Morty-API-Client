@@ -8,8 +8,8 @@ import { useQuery } from "react-query"
 
 export default function useEntityPagination<T>(entityAPI: GenericEntity<T>) {
   const router = useRouter()
-  const page = parseInt(extractParam(router.asPath, "page") || '1')
-  const name = extractParam(router.asPath, "name")
+  const page = +extractParam(router, "page") || 1
+  const name = extractParam(router, "name")
 
   const { isLoading, error, data } = useQuery(
     ['selectedAPI', page, name], 

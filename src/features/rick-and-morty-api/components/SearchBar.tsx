@@ -11,7 +11,7 @@ const LIMIT_TO_SHOW = 5
 
 function SearchBar() {
   const router = useRouter()
-  const nameParam = extractParam(router.asPath, 'name')
+  const nameParam = extractParam(router, 'name')
   
   const [ name, setName ] = useState(nameParam)
   const [isInputOnFocus, setIsInputOnFocus] = useState(false)
