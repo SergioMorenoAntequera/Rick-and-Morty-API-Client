@@ -1,10 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import GenericEntity from "@/features/rick-and-morty-api/types/generic-entity"
-import { extractPageNumber, extractParam } from "@/features/rick-and-morty-api/utils/url-data-collection"
+import { extractParam } from "@/features/rick-and-morty-api/utils/url-data-collection"
 import { getAroundNumbers } from "@/utils/number.utils"
 import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
 import { useQuery } from "react-query"
 
 export default function useEntityPagination<T>(entityAPI: GenericEntity<T>) {
